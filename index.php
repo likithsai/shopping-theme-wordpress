@@ -8,6 +8,6 @@
     Tested upto: 5.4
     */
 
-
-    echo "<p>sample example</p>";
+    get_header();
+    get_footer();
 ?>
