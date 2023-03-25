@@ -1,9 +1,11 @@
 <?php
+    require_once ('inc/config.php');
+    
     if ( function_exists( 'register_nav_menus' ) ) {
         function create_menu_options() {
             add_menu_page(
-                'Recent Bids',
-                'Auction Reports',
+                APP_NAME,
+                APP_NAME,
                 'manage_options',
                 'wc-shopping-theme',
                 'actions_recent_bids_list',
@@ -57,7 +59,7 @@
             );
 
             function actions_recent_bids_list() {
-                echo 'this is sample example';
+                echo esc_html(wp_get_theme());
             }
         }
     }

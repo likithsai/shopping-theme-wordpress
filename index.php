@@ -1,11 +1,10 @@
 <?php
     /*
-    Theme Name: shopping-theme-wordpress
-    Author: wp content
+    Theme Name: Majeto
+    Author: B P Likith Sai
     Author URI: https://wp-content.co/
-    Description: My custom theme
+    Description: Shopping website theme
     Version: 1.0
-    Tested upto: 5.4
     */
 
     get_header();
