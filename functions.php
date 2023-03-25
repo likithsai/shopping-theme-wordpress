@@ -5,41 +5,59 @@
                 'Recent Bids',
                 'Auction Reports',
                 'manage_options',
-                'wc-auction-reports',
+                'wc-shopping-theme',
                 'actions_recent_bids_list',
                 'dashicons-store',
                 56
             );    
 
             add_submenu_page(
-                'wc-auction-reports',               // parent slug
-                'Recent Bids',                      // page title
-                'Recent Bids',                      // menu title
+                'wc-shopping-theme',                // parent slug
+                'Overview',                         // page title
+                'Overview',                         // menu title
                 'manage_options',                   // capability
-                'wc-auction-reports',               // slug
+                'wc-shopping-theme',                // slug
                 'actions_recent_bids_list'
             );
 
             add_submenu_page(
-                'wc-auction-reports',               // parent slug
-                'Customer Spending',                // page title
-                'Customer Spending',                // menu title
+                'wc-shopping-theme',                // parent slug
+                'Products',                         // page title
+                'Products',                         // menu title
                 'manage_options',                   // capability
-                'wc-acutions-customers-spendings',  // slug
+                'wc-shopping-themeproducts',        // slug
                 'actions_recent_bids_list'
             );
         
             add_submenu_page(
-                'wc-auction-reports',          // parent slug
-                'Customer Bids',               // page title
-                'Customer Bids',               // menu title
-                'manage_options',              // capability
-                'wc-acutions-customers-bids',  // slug
+                'wc-shopping-theme',                // parent slug
+                'Categories',                       // page title
+                'Categories',                       // menu title
+                'manage_options',                   // capability
+                'wc-shopping-themecategories',      // slug
+                'actions_recent_bids_list'
+            );
+
+            add_submenu_page(
+                'wc-shopping-theme',                // parent slug
+                'Users',                            // page title
+                'Users',                            // menu title
+                'manage_options',                   // capability
+                'wc-shopping-themeusers',  // slug
+                'actions_recent_bids_list'
+            );
+
+            add_submenu_page(
+                'wc-shopping-theme',                // parent slug
+                'Settings',                         // page title
+                'Settings',                         // menu title
+                'manage_options',                   // capability
+                'wc-shopping-themesettings',        // slug
                 'actions_recent_bids_list'
             );
 
             function actions_recent_bids_list() {
-                echo 'sdvbd';
+                echo 'this is sample example';
             }
         }
     }
