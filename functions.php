@@ -1,11 +1,12 @@
 <?php
     require_once ('inc/config.php');
-    
+    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
     if ( function_exists( 'register_nav_menus' ) ) {
         function create_menu_options() {
             add_menu_page(
-                APP_NAME,
-                APP_NAME,
+                'Malejo',
+                'Malejo',
                 'manage_options',
                 'wc-shopping-theme',
                 'actions_recent_bids_list',
@@ -59,10 +60,27 @@
             );
 
             function actions_recent_bids_list() {
-                echo esc_html(wp_get_theme());
+                echo 'Matejo';
+            }
+        }
+
+        //  create required tables
+        function create_database_tables() {
+            global $wpdb;
+            $database_entries = [
+                "shopping" => "id mediumint(9) NOT NULL AUTO_INCREMENT, time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL, views smallint(5) NOT NULL, clicks smallint(5) NOT NULL, UNIQUE KEY id (id)",
+                "scasc" => "id mediumint(9) NOT NULL AUTO_INCREMENT, time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL, views smallint(5) NOT NULL, clicks smallint(5) NOT NULL, UNIQUE KEY id (id)"
+            ];
+            $charset_collate = $wpdb->get_charset_collate();
+
+            foreach($database_entries as $key => $value) {
+                $table_name = $wpdb->prefix . $key;
+                $sql = "CREATE TABLE IF NOT EXISTS $table_name($value)$charset_collate;"; 
+                dbDelta( $sql );
             }
         }
     }
 
-    add_action('admin_menu','create_menu_options');
+    add_action( 'admin_menu', 'create_menu_options' );
+    add_action('init', 'create_database_tables');
 ?>
