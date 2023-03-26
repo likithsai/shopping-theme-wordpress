@@ -120,7 +120,7 @@
         }
     }
 
-    function xobamax_resources($hook) {
+    function load_styles($hook) {
         if($hook != 'toplevel_page_wc-shopping-theme') {
             return;
         }
@@ -129,7 +129,7 @@
         wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.3.4', true );
     }
 
-    add_action( 'admin_enqueue_scripts', 'xobamax_resources' );
+    add_action( 'admin_enqueue_scripts', 'load_styles' );
     add_action( 'admin_menu', 'create_menu_options' );
     add_action( 'init', 'create_database_tables' );
 ?>
