@@ -232,10 +232,33 @@
 
 		function get_bulk_actions() {
 			$actions = array(
-				'delete_selected' => 'Delete',
-				'download_selected' => 'Download'
+				'delete_selected' => 'Delete'
 			);
 			return $actions;
+		}
+
+		public function process_bulk_action() {
+			// security check!
+			if ( isset( $_POST['_wpnonce'] ) && ! empty( $_POST['_wpnonce'] ) ) {
+	
+				$nonce  = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING );
+				$action = 'bulk-' . $this->_args['plural'];
+	
+				if ( ! wp_verify_nonce( $nonce, $action ) )
+					wp_die( 'Nope! Security check failed!' );
+	
+			}
+	
+			$action = $this->current_action();
+	
+			switch ( $action ) {
+	
+				default:
+				wp_die( $action );
+					break;
+			}
+	
+			return $action;
 		}
 
 		// Adding action links to column
@@ -245,7 +268,11 @@
 				'delete'    => sprintf('<a href="?page=%s&action=%s&element=%s">' . __('Delete', 'supporthost-admin-table') . '</a>', $_REQUEST['page'], 'delete', $item['ID']),
 			);
 	
-			return sprintf('%1$s %2$s', $item['product_name'], $this->row_actions($actions));
+			return sprintf('%1$s %2$s', $item['product_name'], $this->bulk_row_actions($actions));
+		}
+
+		function no_items() {
+			_e( 'No products found, dude.' );
 		}
 	}
 ?>
