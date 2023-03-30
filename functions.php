@@ -1,3 +1,4 @@
+<!-- https://rudrastyh.com/wordpress/creating-options-pages.html -->
 <?php
     require_once ('inc/config.php');
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
