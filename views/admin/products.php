@@ -42,13 +42,13 @@
 		 */
 		public function get_columns() {
 			$columns = array(
-				'cb'            		=> '<input type="checkbox" />',
-				'product_id'          	=> 'Product ID',
-				'product_name'       	=> 'Product Name',
-				// 'product_desc_short' 	=> 'Product Desc (Short)',
-				// 'product_desc_long'     => 'Product Desc (Long)',
-				'product_price'    => 'Product Price',
-				'product_created_date'      => 'Product Created Date'
+				'cb' => '<input type="checkbox" />',
+				'product_id' => 'ID',
+				'product_name' => 'Name',
+				'product_desc' => 'Description',
+				'product_old_price' => 'Old Price',
+				'product_new_price' => 'New Price',
+				'product_created_date' => 'Created Date'
 			);
 
 			return $columns;
@@ -73,7 +73,12 @@
 		 * @return Array
 		 */
 		public function get_sortable_columns() {
-			return array('product_id' => array('product_id', false), 'product_created_date'   => array('product_created_date', true));
+			return array(
+				'product_id' => array('product_id', false), 
+				'product_created_date'   => array('product_created_date', true), 
+				'product_old_price'   => array('product_old_price', true),
+				'product_new_price'   => array('product_new_price', true)
+			);
 		}
 
 		/**
@@ -90,8 +95,10 @@
 			foreach($wk_post as $wp) {
 				$data[] = array(
 					'product_id' => $wp->product_id,
-					'product_name' => '<u>' . $wp->product_name . '</u><br />' . $wp->product_desc_short,
-					'product_price' => $wp->product_item_oldprice,
+					'product_name' => $wp->product_name,
+					'product_desc' => $wp->product_desc_short,
+					'product_old_price' => $wp->product_item_oldprice,
+					'product_new_price' => $wp->product_item_oldprice,
 					'product_created_date' => $wp->product_createddate
 				);
 			}
@@ -111,9 +118,9 @@
 			switch( $column_name ) {
 				case 'product_id':
 				case 'product_name':
-				// case 'product_desc_short':
-				// case 'product_desc_long':
-				case 'product_price':
+				case 'product_desc':
+				case 'product_old_price':
+				case 'product_new_price':
 				case 'product_created_date':
 					return esc_html( $item[ $column_name ] );
 
@@ -162,7 +169,7 @@
 		public function process_bulk_action() {
 			// security check!
 			if ('delete_selected' === $this->current_action()) {
-
+				var_dump($this->current_action());
 			}
 		}
 
