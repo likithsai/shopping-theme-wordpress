@@ -83,96 +83,18 @@
 		 */
 		private function table_data() {
 			$data = array();
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'tbl_products';
+			$wk_post=$wpdb->get_results("SELECT * FROM $table_name");
 
-			$data[] = array(
-						'product_id'          => 1,
-						'product_name'       => '<u>The Shawshank Redemption</u><br />Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
-						// 'product_desc_short' => 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
-						// 'product_desc_long'        => '1994',
-						'product_price'    => 'Frank Darabont',
-						'product_created_date'      => '9.3'
-						);
-
-			$data[] = array(
-						'product_id'          => 2,
-						'product_name'       => '<u>The Godfather</u><br />The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.',
-						// 'product_desc_short' => 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.',
-						// 'product_desc_long'        => '1972',
-						'product_price'    => 'Francis Ford Coppola',
-						'product_created_date'      => '9.2'
-						);
-
-			$data[] = array(
-						'product_id'          => 3,
-						'product_name'       => '<u>The Godfather: Part II</u><br/>The early life and career of Vito Corleone in 1920s New York is portrayed while his son, Michael, expands and tightens his grip on his crime syndicate stretching from Lake Tahoe, Nevada to pre-revolution 1958 Cuba.',
-						// 'product_desc_short' => 'The early life and career of Vito Corleone in 1920s New York is portrayed while his son, Michael, expands and tightens his grip on his crime syndicate stretching from Lake Tahoe, Nevada to pre-revolution 1958 Cuba.',
-						// 'product_desc_long'        => '1974',
-						'product_price'    => 'Francis Ford Coppola',
-						'product_created_date'      => '9.0'
-						);
-
-			$data[] = array(
-						'product_id'          => 4,
-						'product_name'       => '<u>Pulp Fiction</u><br />The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-						// 'product_desc_short' => 'The lives of two mob hit men, a boxer, a gangster\'s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
-						// 'product_desc_long'        => '1994',
-						'product_price'    => 'Quentin Tarantino',
-						'product_created_date'      => '9.0'
-						);
-
-			$data[] = array(
-						'product_id'          => 5,
-						'product_name'       => '<u>The Good, the Bad and the Ugly</u><br />A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.',
-						// 'product_desc_short' => 'A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.',
-						// 'product_desc_long'        => '1966',
-						'product_price'    => 'Sergio Leone',
-						'product_created_date'      => '9.0'
-						);
-
-			$data[] = array(
-						'product_id'          => 6,
-						'product_name'       => '<u>The Dark Knight</u><br/>When Batman, Gordon and Harvey Dent launch an assault on the mob, they let the clown out of the box, the Joker, bent on turning Gotham on itself and bringing any heroes down to his level.',
-						// 'product_desc_short' => 'When Batman, Gordon and Harvey Dent launch an assault on the mob, they let the clown out of the box, the Joker, bent on turning Gotham on itself and bringing any heroes down to his level.',
-						// 'product_desc_long'        => '2008',
-						'product_price'    => 'Christopher Nolan',
-						'product_created_date'      => '9.0'
-						);
-
-			$data[] = array(
-						'product_id'          => 7,
-						'product_name'       => '<u>12 Angry Men</u><br />A dissenting juror in a murder trial slowly manages to convince the others that the case is not as obviously clear as it seemed in court.',
-						// 'product_desc_short' => 'A dissenting juror in a murder trial slowly manages to convince the others that the case is not as obviously clear as it seemed in court.',
-						// 'product_desc_long'        => '1957',
-						'product_price'    => 'Sidney Lumet',
-						'product_created_date'      => '8.9'
-						);
-
-			$data[] = array(
-						'product_id'          => 8,
-						'product_name'       => '<u>Schindler\'s List</u><br />In Poland during World War II, Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.',
-						// 'product_desc_short' => 'In Poland during World War II, Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.',
-						// 'product_desc_long'        => '1993',
-						'product_price'    => 'Steven Spielberg',
-						'product_created_date'      => '8.9'
-						);
-
-			$data[] = array(
-						'product_id'          => 9,
-						'product_name'       => '<u>The Lord of the Rings: The Return of the King</u><br />Gandalf and Aragorn lead the World of Men against Sauron\'s army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.',
-						// 'product_desc_short' => 'Gandalf and Aragorn lead the World of Men against Sauron\'s army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.',
-						// 'product_desc_long'        => '2003',
-						'product_price'    => 'Peter Jackson',
-						'product_created_date'      => '8.9'
-						);
-
-			$data[] = array(
-						'product_id'          => 10,
-						'product_name'       => '<u>Fight Club</u></br>An insomniac office worker looking for a way to change his life crosses paths with a devil-may-care soap maker and they form an underground fight club that evolves into something much, much more...',
-						// 'product_desc_short' => 'An insomniac office worker looking for a way to change his life crosses paths with a devil-may-care soap maker and they form an underground fight club that evolves into something much, much more...',
-						// 'product_desc_long'        => '1999',
-						'product_price'    => 'David Fincher',
-						'product_created_date'      => '8.8'
-						);
+			foreach($wk_post as $wp) {
+				$data[] = array(
+					'product_id' => $wp->product_id,
+					'product_name' => '<u>' . $wp->product_name . '</u><br />' . $wp->product_desc_short,
+					'product_price' => $wp->product_item_oldprice,
+					'product_created_date' => $wp->product_createddate
+				);
+			}
 
 			return $data;
 		}
@@ -239,26 +161,9 @@
 
 		public function process_bulk_action() {
 			// security check!
-			if ( isset( $_POST['_wpnonce'] ) && ! empty( $_POST['_wpnonce'] ) ) {
-	
-				$nonce  = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING );
-				$action = 'bulk-' . $this->_args['plural'];
-	
-				if ( ! wp_verify_nonce( $nonce, $action ) )
-					wp_die( 'Nope! Security check failed!' );
-	
+			if ('delete_selected' === $this->current_action()) {
+
 			}
-	
-			$action = $this->current_action();
-	
-			switch ( $action ) {
-	
-				default:
-				wp_die( $action );
-					break;
-			}
-	
-			return $action;
 		}
 
 		// Adding action links to column
