@@ -82,21 +82,26 @@
                 dbDelta( $sql );
             }
         }
+
+        // function load_styles($hook) {
+        //     if (is_admin()) {
+        //         if($hook != 'toplevel_page_wc-shopping-theme') {
+        //             return;
+        //         }
+
+        //         wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css' );
+        //         wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.3.4', true );
+        //     }
+        // }
+        
+        function rjs_styles() {
+            wp_enqueue_style( 'theme', get_template_directory_uri() . '/assets/css/theme.min.css', array(), filemtime(get_template_directory() .'/assets/css/theme.min.css'), 'all');
+        }
     }
-
-    // function load_styles($hook) {
-    //     if (is_admin()) {
-    //         if($hook != 'toplevel_page_wc-shopping-theme') {
-    //             return;
-    //         }
-
-    //         wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css' );
-    //         wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.3.4', true );
-    //     }
-    // }
 
     // add_action( 'admin_enqueue_scripts', 'load_styles' );
     add_action( 'admin_menu', 'create_menu_options' );
     add_action( 'init', 'create_database_tables' );
-
+    // add_action( 'admin_enqueue_scripts', 'rjs_styles' );
+    add_action( 'wp_enqueue_scripts', 'rjs_styles' );
 ?>

@@ -1,0 +1,21 @@
+{
+  "name": "majeto",
+  "version": "1.0.0",
+  "description": "wordpress shopping theme",
+  "main": "postcss.config.js",
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "cssnano": "^6.0.0",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.3.1"
+  },
+  "scripts": {
+    "watch": "TAILWIND_MODE=watch postcss assets/css/theme.css -o assets/css/theme.min.css -w",
+    "prod": "NODE_ENV=production TAILWIND_MODE=build postcss assets/css/theme.css -o assets/css/theme.min.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
