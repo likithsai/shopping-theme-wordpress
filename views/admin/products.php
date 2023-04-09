@@ -44,6 +44,7 @@
 			$columns = array(
 				'cb' => '<input type="checkbox" />',
 				'product_id' => 'ID',
+				'product_images' => 'Image',
 				'product_name' => 'Name',
 				'product_desc' => 'Description',
 				'product_old_price' => 'Old Price',
@@ -95,15 +96,24 @@
 			foreach($wk_post as $wp) {
 				$data[] = array(
 					'product_id' => $wp->product_id,
+					'product_images' => $this->decode_img_json($wp->product_img),
 					'product_name' => $wp->product_name,
 					'product_desc' => $wp->product_desc_short,
 					'product_old_price' => $wp->product_item_oldprice,
-					'product_new_price' => $wp->product_item_oldprice,
+					'product_new_price' => $wp->product_item_newprice,
 					'product_created_date' => $wp->product_createddate
 				);
 			}
 
 			return $data;
+		}
+
+		private function decode_img_json($json) {
+			$imgStr = '';
+			foreach(json_decode($json)[0] -> itemimages as $img) {
+				$imgStr .= "<img style='display: block;' width='100' height='100' src='{$img->imageurl}' />";
+			}
+			return $imgStr;
 		}
 
 		/**
@@ -117,12 +127,13 @@
 		public function column_default( $item, $column_name ) {
 			switch( $column_name ) {
 				case 'product_id':
+				case 'product_images':
 				case 'product_name':
 				case 'product_desc':
 				case 'product_old_price':
 				case 'product_new_price':
 				case 'product_created_date':
-					return esc_html( $item[ $column_name ] );
+					return $item[ $column_name ];
 
 				default:
 					return esc_html( print_r( $item, true ) );

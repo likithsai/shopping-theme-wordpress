@@ -59,10 +59,10 @@
                 'wc-shopping-themesettings',        // slug
                 'actions_recent_bids_list'
             );
+        }
 
-            function actions_recent_bids_list() {
-               include_once('views/admin/common.php');
-            }
+        function actions_recent_bids_list() {
+            include_once('views/admin/common.php');
         }
 
         //  create required tables
@@ -72,7 +72,7 @@
                 "tbl_users" => "user_id mediumint(9) NOT NULL AUTO_INCREMENT, user_name varchar(200) DEFAULT NULL, user_email varchar(200) DEFAULT NULL, user_password varchar(200) NOT NULL, user_createddate timestamp NOT NULL DEFAULT current_timestamp(), PRIMARY KEY (user_id)",
                 "tbl_orders" => "order_id mediumint(9) NOT NULL AUTO_INCREMENT, order_name varchar(200) DEFAULT NULL, order_item varchar(200) DEFAULT NULL, order_cusid mediumint(9) DEFAULT NULL, order_price float DEFAULT NULL, order_createddate timestamp NOT NULL DEFAULT current_timestamp(), PRIMARY KEY (order_id), KEY talk_cusid (order_cusid), CONSTRAINT talk_cusid FOREIGN KEY (order_cusid) REFERENCES " . $wpdb -> prefix . "tbl_users(user_id) ON DELETE SET NULL ON UPDATE SET NULL",
                 "tbl_categories" => "category_id mediumint(9) NOT NULL AUTO_INCREMENT, category_name varchar(200) NOT NULL, category_createddate timestamp NOT NULL DEFAULT current_timestamp(), PRIMARY KEY (category_id)",
-                "tbl_products" => "product_id mediumint(9) NOT NULL AUTO_INCREMENT, product_name varchar(200) DEFAULT NULL, product_desc_short varchar(100) DEFAULT NULL, product_desc_long varchar(200) DEFAULT NULL, product_category_id mediumint(9) DEFAULT NULL, product_item_oldprice float DEFAULT NULL, product_item_newprice float DEFAULT NULL, product_createddate timestamp NOT NULL DEFAULT current_timestamp(), PRIMARY KEY (product_id), KEY talk_productid (product_id), CONSTRAINT talk_productcatid FOREIGN KEY (product_category_id) REFERENCES " . $wpdb -> prefix . "tbl_categories(category_id) ON DELETE SET NULL ON UPDATE SET NULL"
+                "tbl_products" => "product_id mediumint(9) NOT NULL AUTO_INCREMENT, product_name varchar(200) DEFAULT NULL, product_desc_short varchar(100) DEFAULT NULL, product_desc_long varchar(200) DEFAULT NULL, product_img JSON DEFAULT NULL, product_category_id mediumint(9) DEFAULT NULL, product_item_oldprice float DEFAULT NULL, product_item_newprice float DEFAULT NULL, product_createddate timestamp NOT NULL DEFAULT current_timestamp(), PRIMARY KEY (product_id), KEY talk_productid (product_id), CONSTRAINT talk_productcatid FOREIGN KEY (product_category_id) REFERENCES " . $wpdb -> prefix . "tbl_categories(category_id) ON DELETE SET NULL ON UPDATE SET NULL"
             ];
             $charset_collate = $wpdb -> get_charset_collate();
 
