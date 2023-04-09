@@ -1,10 +1,10 @@
 module.exports = {
   mode: 'jit',                           //ADD THIS LINE
-  purge: [                               //CONFIGURE CORRECTLY
+  content: [                               //CONFIGURE CORRECTLY
     '**/*.php',
     '*.php',
   ],
-  darkMode: false,
+  darkMode: 'media',
   theme: {
     extend: {},
   },
