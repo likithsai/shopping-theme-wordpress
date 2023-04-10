@@ -3,6 +3,11 @@
     require_once ('inc/config.php');
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
+    if ( ! defined( '_S_VERSION' ) ) {
+        // Replace the version number of the theme on each release.
+        define( '_S_VERSION', '1.0.0' );
+    }
+
     if ( function_exists( 'register_nav_menus' ) ) {
         function create_menu_options() {
             add_menu_page(
@@ -83,25 +88,12 @@
             }
         }
 
-        // function load_styles($hook) {
-        //     if (is_admin()) {
-        //         if($hook != 'toplevel_page_wc-shopping-theme') {
-        //             return;
-        //         }
-
-        //         wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css' );
-        //         wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '3.3.4', true );
-        //     }
-        // }
-        
         function rjs_styles() {
-            wp_enqueue_style( 'theme', get_template_directory_uri() . '/assets/css/theme.min.css', array(), filemtime(get_template_directory() .'/assets/css/theme.min.css'), 'all');
+            wp_enqueue_style( 'theme', get_template_directory_uri() . '/assets/css/theme.min.css', array(), _S_VERSION, 'all');
         }
     }
 
-    // add_action( 'admin_enqueue_scripts', 'load_styles' );
     add_action( 'admin_menu', 'create_menu_options' );
     add_action( 'init', 'create_database_tables' );
-    // add_action( 'admin_enqueue_scripts', 'rjs_styles' );
     add_action( 'wp_enqueue_scripts', 'rjs_styles' );
 ?>
