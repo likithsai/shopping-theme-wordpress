@@ -1,6 +1,6 @@
 module.exports = {
-  mode: 'jit',                           //ADD THIS LINE
-  content: [                               //CONFIGURE CORRECTLY
+  mode: 'jit',                           // ADD THIS LINE
+  content: [                             // CONFIGURE CORRECTLY
     '**/*.php',
     '*.php',
   ],
