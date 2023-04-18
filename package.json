@@ -4,6 +4,7 @@
   "description": "wordpress shopping theme",
   "main": "postcss.config.js",
   "devDependencies": {
+    "@wordpress/scripts": "^26.2.0",
     "autoprefixer": "^10.4.14",
     "cssnano": "^6.0.0",
     "postcss": "^8.4.21",
@@ -13,9 +14,13 @@
   "scripts": {
     "watch": "TAILWIND_MODE=watch postcss assets/css/theme.scss -o assets/css/theme.min.css -w",
     "prod": "NODE_ENV=production TAILWIND_MODE=build postcss assets/css/theme.scss -o assets/css/theme.min.css",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "wp-scripts build"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^4.2.1"
+  }
 }
