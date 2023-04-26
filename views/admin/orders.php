@@ -5,7 +5,7 @@
 		require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 	}
 
-	class UserList extends WP_List_Table {
+	class OrderList extends WP_List_Table {
 		/**
 		 * Prepare the items for the table to process
 		 *
@@ -45,17 +45,19 @@
 		public function get_columns() {
 			$columns = array(
 				'cb' => '<input type="checkbox" />',
-				'user_id' => 'ID',
-				'user_name' => 'Name',
-				'user_email' => 'Email',
-				'user_created_date' => 'Created Date'
+				'order_id' => 'ID',
+				'order_name' => 'Name',
+				'order_item' => 'Product',
+				'order_cusid' => 'Customer',
+				'order_price' => 'Price',
+				'order_created_date' => 'Created Date'
 			);
 
 			return $columns;
 		}
 
 		function column_cb($item) {
-			return sprintf( '<input type="checkbox" name="element[]" value="%s" />', $item['user_id'] );
+			return sprintf( '<input type="checkbox" name="element[]" value="%s" />', $item['order_id'] );
 		}
 
 		/**
@@ -74,8 +76,8 @@
 		 */
 		public function get_sortable_columns() {
 			return array(
-				'user_id' => array('user_id', false), 
-				'user_created_date'   => array('user_created_date', true)
+				'order_id' => array('order_id', false), 
+				'order_created_date'   => array('order_created_date', true)
 			);
 		}
 
@@ -87,15 +89,17 @@
 		private function table_data() {
 			$data = array();
 			global $wpdb;
-			$table_name = $wpdb->prefix . 'tbl_users';
+			$table_name = $wpdb->prefix . 'tbl_orders';
 			$wk_post=$wpdb->get_results("SELECT * FROM $table_name");
 
 			foreach($wk_post as $wp) {
 				$data[] = array(
-					'user_id' => $wp->user_id,
-					'user_name' => $wp->user_name,
-					'user_email' => $wp->user_email,
-					'user_created_date' => $wp->user_createddate
+					'order_id' => $wp->order_id,
+					'order_name' => $wp->order_name,
+					'order_item' => $wp->order_item,
+					'order_cusid' => $wp->order_cusid,
+					'order_price' => $wp->order_price,
+					'order_created_date' => $wp->order_createddate
 				);
 			}
 
@@ -113,10 +117,12 @@
 		 */
 		public function column_default( $item, $column_name ) {
 			switch( $column_name ) {
-				case 'user_id':
-				case 'user_name':
-				case 'user_email':
-				case 'user_created_date':
+				case 'order_id':
+				case 'order_name':
+				case 'order_item':
+				case 'order_cusid':
+				case 'order_price':
+				case 'order_created_date':
 					return esc_html( $item[ $column_name ] );
 
 				default:
@@ -169,17 +175,17 @@
 		}
 
 		// Adding action links to column
-		function column_user_name($item) {
+		function column_order_name($item) {
 			$actions = array(
 				'edit'      => sprintf('<a href="?page=%s&action=%s&element=%s">' . __('Edit', 'supporthost-admin-table') . '</a>', $_REQUEST['page'], 'edit', $item['ID']),
 				'delete'    => sprintf('<a href="?page=%s&action=%s&element=%s">' . __('Delete', 'supporthost-admin-table') . '</a>', $_REQUEST['page'], 'delete', $item['ID']),
 			);
 	
-			return sprintf('%1$s %2$s', $item['user_name'], $this->bulk_row_actions($actions));
+			return sprintf('%1$s %2$s', $item['order_name'], $this->bulk_row_actions($actions));
 		}
 
 		function no_items() {
-			_e( 'No products found, dude.' );
+			_e( 'No orders found, dude.' );
 		}
 	}
 ?>
@@ -187,7 +193,7 @@
 <div class="wrap">
 	<h1><?php echo get_admin_page_title() ?></h1>
 	<?php
-		$exampleListTable = new UserList();
+		$exampleListTable = new OrderList();
         $exampleListTable->prepare_items();
 		$exampleListTable->display();
 	?>

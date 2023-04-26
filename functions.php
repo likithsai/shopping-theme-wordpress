@@ -58,6 +58,15 @@
 
             add_submenu_page(
                 'wc-shopping-theme',                // parent slug
+                'Orders',                           // page title
+                'Orders',                           // menu title
+                'manage_options',                   // capability
+                'wc-shopping-themeorders',          // slug
+                'actions_recent_bids_list'
+            );
+
+            add_submenu_page(
+                'wc-shopping-theme',                // parent slug
                 'Settings',                         // page title
                 'Settings',                         // menu title
                 'manage_options',                   // capability

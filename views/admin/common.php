@@ -19,5 +19,9 @@
         case 'settings':
             include_once('settings.php');
             break;
+        
+        case 'orders':
+            include_once('orders.php');
+            break;
     }
 ?>
